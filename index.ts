@@ -3,8 +3,8 @@
 import "dotenv/config"; // masa ini di tambahin /config bre?
 
 import os from "os";
-import app from "./src/app.js";
-import connectDB from "./src/config/db.js";
+import app from "./src/app";
+import connectDB from "./src/config/db";
 
 const PORT = process.env.PORT || 5000;
 

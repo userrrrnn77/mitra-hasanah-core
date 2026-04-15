@@ -8,21 +8,21 @@ import express, {
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import indexRoutes from "./routes/routes.js";
+import indexRoutes from "./routes/routes";
 
 const app = express();
 
 app.set("trust proxy", 1);
 
-app.use(helmet());
+// app.use(helmet());
 app.use(morgan("dev")); // Tambahin ini biar lu bisa liat log request di terminal!
 
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    // methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+    // credentials: true,
   }),
 );
 
