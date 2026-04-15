@@ -3,7 +3,7 @@
 import type { Request, Response } from "express";
 import Registration, {
   type RegistrationDocument,
-} from "../models/Registration";
+} from "../models/Registration.js";
 import mongoose from "mongoose";
 
 export const registration = async (req: Request, res: Response) => {
@@ -169,6 +169,73 @@ export const isVerification = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("❌ Verification Error:", error);
 
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const getAllRegistrations = async (req: Request, res: Response) => {
+  try {
+    // 📄 Pagination sederhana: default page 1, limit 10
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    // Ambil data terbaru di paling atas (descending)
+    const registrations = await Registration.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Registration.countDocuments();
+
+    return res.status(200).json({
+      success: true,
+      count: registrations.length,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+      },
+      data: registrations,
+    });
+  } catch (error) {
+    console.error("❌ Get All Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Gagal narik data pendaftaran, bgsd!",
+    });
+  }
+};
+
+export const getRegistrationById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id as string)) {
+      return res.status(400).json({
+        success: false,
+        message: "Format ID ngaco!",
+      });
+    }
+
+    const pendaftar = await Registration.findById(id);
+
+    if (!pendaftar) {
+      return res.status(404).json({
+        success: false,
+        message: "Data pendaftar kaga ketemu, jembot!",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: pendaftar,
+    });
+  } catch (error) {
+    console.error("❌ Get Detail Error:", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",

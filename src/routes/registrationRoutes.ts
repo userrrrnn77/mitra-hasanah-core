@@ -1,1 +1,21 @@
 // src/routes/registrationRoutes.ts
+
+import { Router } from "express";
+import {
+  registration,
+  isVerification,
+  getAllRegistrations,
+  getRegistrationById,
+} from "../controllers/regitrationController.js";
+
+const router = Router();
+
+// 🔓 Public: Siapa aja boleh daftar
+router.post("/", registration);
+
+// 🔐 Admin Only 
+router.get("/", getAllRegistrations);
+router.get("/:id", getRegistrationById);
+router.patch("/verify/:id", isVerification); 
+
+export default router;
