@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "CommonJS", 
-    "moduleResolution": "node", 
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext", // ini kagak bundler bre?
     "lib": ["ESNext"],
-    "allowJs": true,
     "strict": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
     "noEmit": false,
     "outDir": "dist",
     "baseUrl": "src",

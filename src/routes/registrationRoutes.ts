@@ -7,8 +7,7 @@ import {
   isVerification,
   getAllRegistrations,
   getRegistrationById,
-} from "../controllers/regitrationController";
-import connectDB from "config/db";
+} from "../controllers/regitrationController.js";
 
 const router = Router();
 

@@ -8,7 +8,7 @@ import express, {
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import indexRoutes from "./routes/routes";
+import indexRoutes from "./routes/routes.js";
 
 const app = express();
 

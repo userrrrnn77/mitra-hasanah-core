@@ -3,7 +3,7 @@
 import type { Request, Response } from "express";
 import Registration, {
   type RegistrationDocument,
-} from "../models/Registration";
+} from "../models/Registration.js";
 import mongoose from "mongoose";
 
 export const registration = async (req: Request, res: Response) => {
