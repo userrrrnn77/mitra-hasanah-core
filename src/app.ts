@@ -26,6 +26,10 @@ app.use(
   }),
 );
 
+app.options("*", (req, res) => {
+  res.status(204).end(); // Kasih tau browser: "Oke Bre, aman!"
+});
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
