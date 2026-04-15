@@ -5,6 +5,9 @@
     "nama-kelompok": "isi nama kelompok elu bre",
     "name": "isi nama elu bre"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "bun --watch index.ts",
     "start": "node dist/index.js",
