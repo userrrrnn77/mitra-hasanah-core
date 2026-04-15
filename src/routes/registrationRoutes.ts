@@ -13,15 +13,7 @@ import connectDB from "config/db";
 const router = Router();
 
 // 🔓 Public: Siapa aja boleh daftar
-router.post("/", async (req: Request, res: Response) => {
-  try {
-    await connectDB();
-    await registration(req, res);
-    res.status(200).json({ success: true, message: "Masuk bre" });
-  } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
+router.post("/", registration);
 
 // 🔐 Admin Only
 router.get("/", getAllRegistrations);
