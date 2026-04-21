@@ -8,9 +8,11 @@ import "dotenv/config";
 // cache connection biar gak reconnect tiap request
 let isConnected = false;
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
 
 export default async function handler(req: Request, res: Response) {
+
+  console.log("RUNNING NEW BUILD 🚀");
   // ✅ HANDLE CORS DI LEVEL PALING ATAS (ANTI ERROR)
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
