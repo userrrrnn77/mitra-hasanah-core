@@ -25,10 +25,11 @@
     "@types/helmet": "^4.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
-    "@types/multer": "^2.1.0"
+    "@types/multer": "^2.1.0",
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import BaitulMaal from "../models/BaitulMaal.js";
 import { deleteMultipleFromCloudinary } from "../middlewares/uploadMiddleware.js";
-import { AuthRequest } from "@/middlewares/authMiddleware.js";
+import { AuthRequest } from "../middlewares/authMiddleware.js";
 
 export const createProgram = async (req: AuthRequest, res: Response) => {
   try {

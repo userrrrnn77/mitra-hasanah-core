@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import Products from "../models/Products.js";
 import ProductDetail from "../models/ProductDetail.js";
 import { deleteFromCloudinary } from "../middlewares/uploadMiddleware.js";
-import { AuthRequest } from "@/middlewares/authMiddleware.js";
+import { AuthRequest } from "../middlewares/authMiddleware.js";
 
 /**
  * TAMBAH PRODUK BARU

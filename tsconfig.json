@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -11,12 +10,6 @@
     "skipLibCheck": true,
     "noEmit": false,
     "outDir": "dist",
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"]
-    },
     "types": ["node"]
-  },
-  "include": ["index.ts", "src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  }
 }

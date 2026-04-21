@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import ProductDetail from "../models/ProductDetail.js";
 import Products from "../models/Products.js";
-import { AuthRequest } from "@/middlewares/authMiddleware.js";
+import { AuthRequest } from "../middlewares/authMiddleware.js";
 
 /**
  * CREATE PRODUCT DETAIL

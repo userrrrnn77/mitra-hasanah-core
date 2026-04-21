@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Gallery from "@/models/Galery.js"; // Pastiin path model lu bener
+import Gallery from "../models/Galery.js"; // Pastiin path model lu bener
 import { deleteFromCloudinary } from "../middlewares/uploadMiddleware.js"; // Buat fungsi delete nanti
 
 // @desc    Upload Foto ke Galeri (Direct JSON)
