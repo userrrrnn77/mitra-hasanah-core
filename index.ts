@@ -1,9 +1,12 @@
 import app from "./src/app.js";
 import connectDB from "./src/config/db.js";
 import type { Request, Response } from "express";
+import "dotenv/config";
 
 // cache connection biar gak reconnect tiap request
 let isConnected = false;
+
+const PORT = process.env.PORT || 3001;
 
 export default async function handler(req: Request, res: Response) {
   // ✅ HANDLE CORS DI LEVEL PALING ATAS (ANTI ERROR)
@@ -27,12 +30,30 @@ export default async function handler(req: Request, res: Response) {
 
     // ✅ PASS KE EXPRESS
     return app(req, res);
-  } catch (error) {
+  } catch (error: any) {
     console.error("🚨 Handler Error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
+      error: process.env.NODE_ENV === "development" ? error.message : null,
     });
   }
 }
+
+async function start() {
+  try {
+    console.log("⏳ Connecting MongoDB...");
+    await connectDB();
+    console.log("✅ MongoDB Connected!");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server jalan di http://localhost:${PORT}`);
+      console.log("============================================");
+    });
+  } catch (err) {
+    console.error("🚨 Failed start:", err);
+  }
+}
+
+start();

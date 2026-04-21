@@ -9,6 +9,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import indexRoutes from "./routes/routes.js";
+import { AuthRequest } from "./middlewares/authMiddleware.js";
+import cloudinaryRoutes from "./routes/cloudinaryRoutes.js";
 
 const app = express();
 
@@ -20,9 +22,9 @@ app.use(morgan("dev")); // Tambahin ini biar lu bisa liat log request di termina
 app.use(
   cors({
     origin: "*",
-    // methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-    // credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 );
 
@@ -33,11 +35,13 @@ app.options("*", (req, res) => {
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/cloudinary", cloudinaryRoutes);
+
 // 📍 API Routes
 app.use("/api", indexRoutes);
 
 // 📍 Health Check / Landing
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (req: AuthRequest, res: Response) => {
   res.status(200).json({
     status: "OK",
     message: "Backend Mitra Hasanah JosJis",
@@ -46,7 +50,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // ⚠️ Global 404 Handler (Taruh setelah routes!)
-app.use((req: Request, res: Response) => {
+app.use((req: AuthRequest, res: Response) => {
   return res.status(404).json({
     success: false,
     message: `Endpoint ${req.originalUrl} Tidak Ditemukan, jangan ngasal bre!`,
@@ -54,7 +58,7 @@ app.use((req: Request, res: Response) => {
 });
 
 // ❌ Global Error Handler
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+app.use((err: unknown, req: AuthRequest, res: Response, next: NextFunction) => {
   if (err instanceof Error) {
     console.error("🚨 SERVER ERROR:", err.stack);
     return res.status(500).json({

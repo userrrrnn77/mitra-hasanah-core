@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext", // ini kagak bundler bre?
+    "moduleResolution": "NodeNext",
     "lib": ["ESNext"],
     "strict": true,
     "isolatedModules": true,

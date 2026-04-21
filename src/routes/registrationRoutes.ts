@@ -7,6 +7,7 @@ import {
   isVerification,
   getAllRegistrations,
   getRegistrationById,
+  deleteRegistration,
 } from "../controllers/regitrationController.js";
 
 const router = Router();
@@ -18,5 +19,6 @@ router.post("/", registration);
 router.get("/", getAllRegistrations);
 router.get("/:id", getRegistrationById);
 router.patch("/verify/:id", isVerification);
+router.delete("/:id", deleteRegistration);
 
 export default router;

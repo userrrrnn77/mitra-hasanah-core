@@ -242,3 +242,39 @@ export const getRegistrationById = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const deleteRegistration = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // 🕵️ Cek dulu ID-nya bener apa kagak, jangan asal hantam
+    if (!mongoose.Types.ObjectId.isValid(id as string)) {
+      return res.status(400).json({
+        success: false,
+        message: "Format ID ngaco, kaga bisa dihapus!",
+      });
+    }
+
+    // 💣 Eksekusi pemusnahan
+    const pendaftar = await Registration.findByIdAndDelete(id);
+
+    // 🔎 Cek apa datanya emang ada pas mau dihapus
+    if (!pendaftar) {
+      return res.status(404).json({
+        success: false,
+        message: "Data emang udah kaga ada, ngapain dihapus lagi, jembot!",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: `Data pendaftar atas nama ${pendaftar.fullName} resmi dimusnahkan!`,
+    });
+  } catch (error) {
+    console.error("❌ Delete Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Gagal musnahin data, server lagi pusing!",
+    });
+  }
+};
