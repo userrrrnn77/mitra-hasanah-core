@@ -58,7 +58,7 @@ export const createDetail = async (req: AuthRequest, res: Response) => {
  * GET DETAIL BY ID (SLUG)
  * Route: GET /api/product-details/:id
  */
-export const getDetailById = async (req: AuthRequest, res: Response) => {
+export const getDetailById = async (req: Request, res: Response) => {
   try {
     // FIX TS: Cast params.id biar kaga error toLowerCase
     const idParam = req.params.id as string;

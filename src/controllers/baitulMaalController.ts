@@ -52,7 +52,7 @@ export const createProgram = async (req: AuthRequest, res: Response) => {
  * GET ALL PROGRAMS (Filterable by Category)
  * Route: GET /api/baitul-maal?cat=SOSIAL
  */
-export const getAllPrograms = async (req: AuthRequest, res: Response) => {
+export const getAllPrograms = async (req: Request, res: Response) => {
   try {
     const { cat } = req.query;
     let filter: any = {};
@@ -81,7 +81,7 @@ export const getAllPrograms = async (req: AuthRequest, res: Response) => {
  * GET PROGRAM BY ID (Slug)
  * Route: GET /api/baitul-maal/:id
  */
-export const getProgramById = async (req: AuthRequest, res: Response) => {
+export const getProgramById = async (req: Request, res: Response) => {
   try {
     const idParam = req.params.id as string;
     const cleanId = idParam.toLowerCase().trim();

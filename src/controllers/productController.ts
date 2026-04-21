@@ -53,7 +53,7 @@ export const addNewProduct = async (req: AuthRequest, res: Response) => {
 /**
  * GET FULL PRODUCT DATA (Catalog + Detail)
  */
-export const getFullProductData = async (req: AuthRequest, res: Response) => {
+export const getFullProductData = async (req: Request, res: Response) => {
   try {
     // FIX: Ambil dari params dan paksa jadi string
     const idParam = req.params.id as string;
@@ -93,7 +93,7 @@ export const getFullProductData = async (req: AuthRequest, res: Response) => {
 /**
  * AMBIL SEMUA PRODUK (Filterable)
  */
-export const getAllProducts = async (req: AuthRequest, res: Response) => {
+export const getAllProducts = async (req: Request, res: Response) => {
   try {
     const { cat } = req.query;
     let filter: any = {};
