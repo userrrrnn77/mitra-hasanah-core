@@ -1,9 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User, { IUserDocument, UserDocument } from "../models/User.js";
-import rateLimitImport from "express-rate-limit";
+import rateLimit from "express-rate-limit";
 
-const rateLimit = rateLimitImport as unknown as typeof rateLimitImport
+const rateLimitFn = rateLimit as unknown as (
+  options: any
+) => ReturnType<typeof rateLimit>;
 
 interface JwtPayload {
   id: string;
@@ -86,7 +88,7 @@ export const roleMiddleware = (allowedRoles: string[]) => {
   };
 };
 
-export const loginLimiter = rateLimit({
+export const loginLimiter = rateLimitFn({
   windowMs: 15 * 60 * 1000,
   max: 10,
   handler: (req: AuthRequest, res: Response) => {
@@ -99,7 +101,7 @@ export const loginLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-export const antiSpam = rateLimit({
+export const antiSpam = rateLimitFn({
   windowMs: 1 * 60 * 1000,
   max: 5,
   handler: (req: AuthRequest, res: Response) => {
