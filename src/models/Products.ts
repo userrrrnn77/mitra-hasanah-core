@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export interface IProducts {
   id: string; // Slug/ID Manual buat relasi
@@ -15,7 +15,7 @@ export interface IProducts {
 
 export interface IProductsDocument extends IProducts, Document {}
 
-const ProductsSchema = new Schema<IProductsDocument>(
+const ProductsSchema = new mongoose.Schema<IProductsDocument>(
   {
     id: {
       type: String,
@@ -58,7 +58,7 @@ ProductsSchema.statics.findByIdManual = function (id: string) {
 };
 
 const Products =
-  (models.Products as import("mongoose").Model<IProductsDocument>) ||
-  model<IProductsDocument>("Products", ProductsSchema);
+  (mongoose.models.Products as import("mongoose").Model<IProductsDocument>) ||
+  mongoose.model<IProductsDocument>("Products", ProductsSchema);
 
 export default Products;

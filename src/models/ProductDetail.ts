@@ -1,4 +1,4 @@
-import { Document, Model, Schema, model, models } from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
 // Interface buat Section (List benefit/syarat)
 export interface ISection {
@@ -25,7 +25,7 @@ export interface IProductDetailModel extends Model<IProductDetailDocument> {
 }
 
 // Schema Section (Embedded)
-const SectionSchema = new Schema<ISection>(
+const SectionSchema = new mongoose.Schema<ISection>(
   {
     subtitle: {
       type: String,
@@ -45,7 +45,7 @@ const SectionSchema = new Schema<ISection>(
 );
 
 // Schema Utama Product Detail
-const ProductDetailSchema = new Schema<
+const ProductDetailSchema = new mongoose.Schema<
   IProductDetailDocument,
   IProductDetailModel
 >(
@@ -115,8 +115,8 @@ ProductDetailSchema.methods.getSectionBySubtitle = function (
 
 // Export Model
 const ProductDetail =
-  (models.ProductDetail as IProductDetailModel) ||
-  model<IProductDetailDocument, IProductDetailModel>(
+  (mongoose.models.ProductDetail as IProductDetailModel) ||
+  mongoose.model<IProductDetailDocument, IProductDetailModel>(
     "ProductDetail",
     ProductDetailSchema,
   );

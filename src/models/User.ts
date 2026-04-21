@@ -1,4 +1,4 @@
-import { Document, Model, Schema, model, models } from "mongoose";
+import mongoose, { Document, Model} from "mongoose";
 import bcrypt from "bcryptjs";
 
 export interface IUser {
@@ -6,7 +6,7 @@ export interface IUser {
   phone: string;
   password?: string;
   role: "ADMIN";
-  imageProfile?: string; 
+  imageProfile?: string;
   lastLogin?: Date;
   createdAt?: Date;
   updatedAt?: Date;
@@ -16,9 +16,9 @@ export interface IUserDocument extends IUser, Document {
   comparePassword(password: string): Promise<boolean>;
 }
 
-export type UserDocument = IUser & Document & IUserDocument
+export type UserDocument = IUser & Document & IUserDocument;
 
-const UserSchema = new Schema<IUserDocument>(
+const UserSchema = new mongoose.Schema<IUserDocument>(
   {
     name: {
       type: String,
@@ -79,7 +79,7 @@ UserSchema.methods.comparePassword = async function (password: string) {
 };
 
 const User =
-  (models.User as Model<IUserDocument>) ||
-  model<IUserDocument>("User", UserSchema);
+  (mongoose.models.User as Model<IUserDocument>) ||
+  mongoose.model<IUserDocument>("User", UserSchema);
 
 export default User;

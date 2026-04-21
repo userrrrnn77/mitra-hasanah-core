@@ -1,4 +1,4 @@
-import { Document, Model, Schema, model, models } from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
 export interface IBaitulMaal {
   id: string;
@@ -20,7 +20,10 @@ export interface IBaitulMaalModel extends Model<IBaitulMaalDocument> {
   findByCategory(cat: string): Promise<IBaitulMaalDocument[]>;
 }
 
-const BaitulMaalSchema = new Schema<IBaitulMaalDocument, IBaitulMaalModel>(
+const BaitulMaalSchema = new mongoose.Schema<
+  IBaitulMaalDocument,
+  IBaitulMaalModel
+>(
   {
     id: {
       type: String,
@@ -52,7 +55,7 @@ const BaitulMaalSchema = new Schema<IBaitulMaalDocument, IBaitulMaalModel>(
         message: "Images tidak boleh kosong",
       },
     },
-    publicIds: { type: [String], required: true }, 
+    publicIds: { type: [String], required: true },
     videoUrl: {
       type: [String],
       default: [],
@@ -91,7 +94,10 @@ BaitulMaalSchema.statics.findByCategory = function (cat: string) {
 };
 
 const BaitulMaal =
-  (models.BaitulMaal as IBaitulMaalModel) ||
-  model<IBaitulMaalDocument, IBaitulMaalModel>("BaitulMaal", BaitulMaalSchema);
+  (mongoose.models.BaitulMaal as IBaitulMaalModel) ||
+  mongoose.model<IBaitulMaalDocument, IBaitulMaalModel>(
+    "BaitulMaal",
+    BaitulMaalSchema,
+  );
 
 export default BaitulMaal;
