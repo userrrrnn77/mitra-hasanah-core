@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "noEmit": false,
     "outDir": "dist",
-    "types": ["node"]
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true
   }
 }
