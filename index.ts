@@ -1,3 +1,5 @@
+// index.ts
+
 import app from "./src/app.js";
 import connectDB from "./src/config/db.js";
 import type { Request, Response } from "express";
@@ -41,19 +43,23 @@ export default async function handler(req: Request, res: Response) {
   }
 }
 
-async function start() {
-  try {
-    console.log("⏳ Connecting MongoDB...");
-    await connectDB();
-    console.log("✅ MongoDB Connected!");
+// =======================
+// Buat Debuging doang nih
+// =======================
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Server jalan di http://localhost:${PORT}`);
-      console.log("============================================");
-    });
-  } catch (err) {
-    console.error("🚨 Failed start:", err);
-  }
-}
+// async function start() {
+//   try {
+//     console.log("⏳ Connecting MongoDB...");
+//     await connectDB();
+//     console.log("✅ MongoDB Connected!");
 
-start();
+//     app.listen(PORT, () => {
+//       console.log(`🚀 Server jalan di http://localhost:${PORT}`);
+//       console.log("============================================");
+//     });
+//   } catch (err) {
+//     console.error("🚨 Failed start:", err);
+//   }
+// }
+
+// start();
