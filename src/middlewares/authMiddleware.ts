@@ -1,11 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User, { IUserDocument, UserDocument } from "../models/User.js";
-import rateLimit from "express-rate-limit";
+import { rateLimit } from "express-rate-limit";
 
-const rateLimitFn = rateLimit as unknown as (
-  options: any
-) => ReturnType<typeof rateLimit>;
+const rateLimitFn: any = rateLimit;
 
 interface JwtPayload {
   id: string;
