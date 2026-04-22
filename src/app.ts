@@ -22,9 +22,9 @@ app.use(morgan("dev")); // Tambahin ini biar lu bisa liat log request di termina
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    // methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+    // credentials: true,
   }),
 );
 
