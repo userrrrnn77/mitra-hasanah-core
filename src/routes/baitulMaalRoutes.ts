@@ -45,9 +45,9 @@ router.post(
 // Update data program & aset Cloudinary
 router.patch(
   "/:id",
-  authMiddleware,
-  roleMiddleware(["ADMIN"]),
-  antiSpam,
+  // authMiddleware,
+  // roleMiddleware(["ADMIN"]),
+  // antiSpam,
   updateProgram,
 );
 
