@@ -11,7 +11,7 @@ export interface ICarouselDocument extends ICarousel, Document {}
 const CarouselSchema = new mongoose.Schema<ICarouselDocument>(
   {
     image: { type: String, required: [true, "Minimal Upload 1 Gambar bre"] },
-    title: { type: String, required: true },
+    title: { type: String },
     publicId: { type: String },
   },
   {

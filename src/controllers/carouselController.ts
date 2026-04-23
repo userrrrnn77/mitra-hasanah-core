@@ -15,7 +15,7 @@ export const addCarousel = async (req: AuthRequest, res: Response) => {
 
     const carouselData = image.map((img: ICarouselDocument) => ({
       image: img.image,
-      title: img.title || "",
+      title: img.title || "Alt Carousel",
       publicId: img.publicId,
     }));
 
