@@ -5,46 +5,40 @@ import Carousel, { ICarouselDocument } from "../models/Caoursel.js";
 
 export const addCarousel = async (req: AuthRequest, res: Response) => {
   try {
-    const { image, title } = req.body; // kenapa req.body, karena gambar langsung upload ke cloud db cuma nerima json bre seperti biasa ya bre
+    const { image, title, publicId } = req.body;
 
-    if (!image && !title) {
+    // 1. Validasi Input Dasar
+    if (!image) {
       return res
         .status(400)
-        .json({ success: false, message: "Masukin dulu fieldnya bre." });
+        .json({ success: false, message: "Masukin dulu fotonya bre." });
     }
 
-    const carouselData = image.map((img: ICarouselDocument) => ({
-      image: img.image,
-      title: img.title || "Alt Carousel",
-      publicId: img.publicId,
-    }));
+    // 2. CEK KAPASITAS DULU (Pake await dan kurung buka-tutup!)
+    const currentCount = await Carousel.countDocuments();
 
-    if (carouselData.length >= 10) {
+    if (currentCount >= 10) {
       return res.status(400).json({
         success: false,
-        message:
-          "Maks Gambar 10 bre, kalo mau upload yang baru minimal hapus 1 dulu",
+        message: "Udah penuh 10 bre! Hapus dulu satu kalo mau ganti baru.",
       });
     }
 
-    const existingCount = await Carousel.countDocuments();
+    // 3. BARU SIMPEN KE DATABASE
+    const newCarousel = await Carousel.create({
+      image,
+      title: title || "Alt Carousel",
+      publicId,
+    });
 
-    if (existingCount + carouselData.length > 10) {
-      return res.status(400).json({
-        success: false,
-        message: `Kapasitas sisa cuma ${10 - existingCount} bre! Jangan maruk lah bgsd.`,
-      });
-    }
-
-    const newCarousel = await Carousel.insertMany(carouselData);
-
+    // 4. Response Wangi
     res.status(201).json({
       success: true,
-      message: `${newCarousel.length} carousel berhasil di upload bre`,
+      message: "Satu foto kenangan berhasil mendarat, Bre! 🚀",
       data: newCarousel,
     });
   } catch (error: any) {
-    console.error("Gagal upload carousel bre", error.message);
+    console.error("Gagal upload carousel bre:", error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
