@@ -52,6 +52,8 @@ const ProductsSchema = new mongoose.Schema<IProductsDocument>(
   },
 );
 
+ProductsSchema.index({ createdAt: -1 });
+
 // Statics buat nyari produk sat-set pake id manual
 ProductsSchema.statics.findByIdManual = function (id: string) {
   return this.findOne({ id: id.toLowerCase().trim() });

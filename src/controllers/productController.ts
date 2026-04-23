@@ -13,9 +13,6 @@ export const addNewProduct = async (req: AuthRequest, res: Response) => {
     const { id, title, fullTitle, desc, icon, category, image, publicId } =
       req.body;
 
-    // Log buat lu buktiin sendiri di terminal nanti
-    console.log("ISI BODY, BRE:", req.body);
-
     const cleanId = String(id).toLowerCase().trim();
 
     // 2. Cek duplikat

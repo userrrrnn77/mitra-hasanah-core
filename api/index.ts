@@ -8,8 +8,6 @@ import "dotenv/config";
 // cache connection biar gak reconnect tiap request
 let isConnected = false;
 
-// const PORT = process.env.PORT || 3001;
-
 export default async function handler(req: Request, res: Response) {
   console.log("RUNNING NEW BUILD 🚀");
   // ✅ HANDLE CORS DI LEVEL PALING ATAS (ANTI ERROR)
@@ -46,24 +44,3 @@ export default async function handler(req: Request, res: Response) {
     });
   }
 }
-
-// =======================
-// Buat Debuging doang nih
-// =======================
-
-// async function start() {
-//   try {
-//     console.log("⏳ Connecting MongoDB...");
-//     await connectDB();
-//     console.log("✅ MongoDB Connected!");
-
-//     app.listen(PORT, () => {
-//       console.log(`🚀 Server jalan di http://localhost:${PORT}`);
-//       console.log("============================================");
-//     });
-//   } catch (err) {
-//     console.error("🚨 Failed start:", err);
-//   }
-// }
-
-// start();
