@@ -6,34 +6,49 @@ import { deleteFromCloudinary } from "../middlewares/uploadMiddleware.js"; // Bu
 // @route   POST /api/gallery
 export const uploadGallery = async (req: Request, res: Response) => {
   try {
-    // Frontend kirim: { images: [{ src: "...", publicId: "..." }, ...] }
-    const { images } = req.body;
+    // Lu ganti 'images' jadi 'items' di FE ya, bgsyad!
+    const { items } = req.body;
 
-    if (!images || !Array.isArray(images) || images.length === 0) {
+    if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "Mana fotonya mbot?! Minimal satu lah!",
+        message:
+          "Mana barangnya mbot?! Minimal satu lah, mau foto apa video bebas!",
       });
     }
 
-    // 1. Mapping data biar sesuai skema DB lu
-    const galleryData = images.map((img: any) => ({
-      src: img.src,
-      publicId: img.publicId,
-      caption: img.caption || "",
-    }));
+    const galleryData = items.map((item: any) => {
+      // 🕵️ Validasi Size (Cuma buat jaga-jaga kalo FE lu jebol)
+      if (item.type === "video" && item.size > 50 * 1024 * 1024) {
+        throw new Error(
+          `Video ${item.name || "lu"} kegedean, Jembot! Maks 50MB!`,
+        );
+      }
 
-    // 2. Insert Massal (Bulk Insert) - Lebih kenceng daripada nge-loop save()
-    const newPhotos = await Gallery.insertMany(galleryData);
+      return {
+        src: item.src,
+        publicId: item.publicId,
+        type: item.type || "image",
+        alt: item.alt || "Konten Gallery",
+        category: item.category || "umum",
+      };
+    });
+
+    // Bulk Insert: Langsung hajar ke MongoDB
+    const newItems = await Gallery.insertMany(galleryData);
 
     res.status(201).json({
       success: true,
-      message: `${newPhotos.length} foto berhasil mejeng di galeri!`,
-      data: newPhotos,
+      // Pake kata 'Konten' biar aman buat foto maupun video!
+      message: `${newItems.length} konten berhasil mejeng, Wizard!`,
+      data: newItems,
     });
   } catch (error: any) {
     console.error("Gagal Upload Galeri, mbot!:", error.message);
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message || "Server lu lagi puyeng, bgsyad!",
+    });
   }
 };
 

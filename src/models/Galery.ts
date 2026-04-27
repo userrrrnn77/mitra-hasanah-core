@@ -4,6 +4,7 @@ export interface IGallery {
   src: string;
   alt: string;
   category?: string;
+  type: "image" | "video"
   publicId: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -18,9 +19,15 @@ const GallerySchema = new mongoose.Schema<IGalleryDocument>(
       required: [true, "URL gambar wajib ada, bgsyad!"],
       trim: true,
     },
+    type: {
+      type: String,
+      enum: ['image', "video"],
+      default: "image",
+      required: true
+    },
     alt: {
       type: String,
-      required: [false, "Alt text wajib diisi biar SEO lu gacor!"],
+      required: false,
       trim: true,
       maxlength: [100, "Alt text jangan kepanjangan, jembut!"],
     },
