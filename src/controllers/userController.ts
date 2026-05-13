@@ -172,7 +172,9 @@ export const updateProfile = async (req: Request, res: Response) => {
  */
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.params.id);
+    const phoneDariParams = req.params.id;
+
+    const user = await User.findOne({ phone: phoneDariParams });
 
     if (!user) {
       return res
