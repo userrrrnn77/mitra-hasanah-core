@@ -186,11 +186,11 @@ export const deleteUser = async (req: Request, res: Response) => {
     if (user._id.toString() === req.user?._id.toString()) {
       return res.status(400).json({
         success: false,
-        message: "Kaga bisa apus akun sendiri bgsd! Masa mau bunuh diri?",
+        message: "Kaga bisa apus akun sendiri, Masa mau bunuh diri?",
       });
     }
 
-    await User.findByIdAndDelete(req.params.id);
+    await User.findOneAndDelete({ phone: phoneDariParams });
 
     res.status(200).json({
       success: true,
