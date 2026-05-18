@@ -56,7 +56,7 @@ export const createUser = async (req: Request, res: Response) => {
     if (userExists) {
       return res
         .status(400)
-        .json({ success: false, message: "User udah ada, taik!" });
+        .json({ success: false, message: "User udah ada, Bre!" });
     }
 
     const imageProfile = req.file ? req.file.path : undefined;
