@@ -24,8 +24,14 @@ export const createProgram = async (req: AuthRequest, res: Response) => {
       });
     }
 
+    const cleanSlug = String(id)
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+
     const program = await BaitulMaal.create({
-      id: String(id).toLowerCase().trim(),
+      id: cleanSlug,
       title,
       tagline,
       description,
@@ -112,61 +118,43 @@ export const updateProgram = async (req: AuthRequest, res: Response) => {
   try {
     const idParam = req.params.id as string;
     const cleanId = idParam.toLowerCase().trim();
-    const updateData = { ...req.body };
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-    // 1. Cari dulu data lamanya
-    const oldProgram = await BaitulMaal.findOne({ id: cleanId });
+    const oldProgram = await BaitulMaal.findOne({
+      id: cleanId,
+    });
+
     if (!oldProgram) {
       return res.status(404).json({
         success: false,
-        message: "Mau update apa mbot? Datanya kaga ada!",
+        message: "Program kaga ada bre",
       });
     }
 
-    // 2. Logic Update Images (Kalo ada file baru)
-    if (files && files["images"]) {
-      // Hapus semua foto lama di Cloudinary biar kaga nyampah
-      if (oldProgram.publicIds && oldProgram.publicIds.length > 0) {
-        await deleteMultipleFromCloudinary(oldProgram.publicIds, "image");
-      }
+    const updateData = {
+      ...req.body,
+    };
+    delete updateData.id;
 
-      // Masukin data foto yang baru
-      updateData.images = files["images"].map((f) => f.path);
-      updateData.publicIds = files["images"].map((f) => f.filename);
-    }
-
-    // 3. Logic Update Videos (Opsional)
-    if (files && files["videos"]) {
-      // Kalo lu mau handle hapus video lama, logicnya sama kyk images
-      updateData.videoUrl = files["videos"].map((f) => f.path);
-    }
-
-    // 4. Handle features (Kalo dikirim stringified array)
-    if (updateData.features) {
-      updateData.features =
-        typeof updateData.features === "string"
-          ? JSON.parse(updateData.features)
-          : updateData.features;
-    }
-
-    // 5. Eksekusi Update
     const updated = await BaitulMaal.findOneAndUpdate(
       { id: cleanId },
       updateData,
-      { returnDocument: "after" }, 
+      {
+        new: true,
+        runValidators: true,
+      },
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      message: "Program sosial berhasil di-update, Wizard!",
+      message: "Program berhasil diupdate",
       data: updated,
     });
   } catch (error: any) {
-    res.status(500).json({
+    console.error("UPDATE ERROR:", error);
+
+    return res.status(500).json({
       success: false,
-      message: "Gagal update program, server meriang!",
-      error: error.message,
+      message: error.message,
     });
   }
 };

@@ -114,14 +114,22 @@ export const updateProduct = async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
     const updateData = { ...req.body };
 
-    // Kalo upload foto baru, bersihin foto lama dulu biar kaga boncos kuota!
-    if (req.file) {
-      const oldProduct = await Products.findOne({ id });
-      if (oldProduct?.publicId) {
-        await deleteFromCloudinary(oldProduct.publicId);
-      }
-      updateData.image = req.file.path;
-      updateData.publicId = req.file.filename;
+    const oldProduct = await Products.findOne({ id });
+
+    if (!oldProduct) {
+      return res.status(404).json({
+        success: false,
+        message: "Produk ghoib!",
+      });
+    }
+
+    // hapus gambar lama jika ganti baru
+    if (
+      oldProduct.publicId &&
+      updateData.publicId &&
+      oldProduct.publicId !== updateData.publicId
+    ) {
+      await deleteFromCloudinary(oldProduct.publicId);
     }
 
     const updated = await Products.findOneAndUpdate({ id }, updateData, {
@@ -129,16 +137,16 @@ export const updateProduct = async (req: AuthRequest, res: Response) => {
       runValidators: true,
     });
 
-    if (!updated)
-      return res
-        .status(404)
-        .json({ success: false, message: "Gagal update, produk ghoib!" });
-
-    res
-      .status(200)
-      .json({ success: true, message: "Produk updated!", data: updated });
+    res.status(200).json({
+      success: true,
+      message: "Produk updated!",
+      data: updated,
+    });
   } catch (error: any) {
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
 };
 
