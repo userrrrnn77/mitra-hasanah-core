@@ -97,7 +97,7 @@ export const getProgramById = async (req: Request, res: Response) => {
     if (!program) {
       return res.status(404).json({
         success: false,
-        message: "Program yang lu cari kaga ada, mbot!",
+        message: "Program yang lu cari kaga ada, Bre!",
       });
     }
 

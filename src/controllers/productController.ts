@@ -20,7 +20,7 @@ export const addNewProduct = async (req: AuthRequest, res: Response) => {
     if (exists) {
       return res.status(400).json({
         success: false,
-        message: "ID Produk udah kepake, mbot!",
+        message: "ID Produk udah kepake, Bre!",
       });
     }
 
@@ -64,7 +64,7 @@ export const getFullProductData = async (req: Request, res: Response) => {
     if (!catalog) {
       return res.status(404).json({
         success: false,
-        message: "Produk kaga terdaftar di katalog, mbot!",
+        message: "Produk kaga terdaftar di katalog, Bre!",
       });
     }
 

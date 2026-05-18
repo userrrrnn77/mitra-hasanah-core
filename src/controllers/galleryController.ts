@@ -13,7 +13,7 @@ export const uploadGallery = async (req: Request, res: Response) => {
       return res.status(400).json({
         success: false,
         message:
-          "Mana barangnya mbot?! Minimal satu lah, mau foto apa video bebas!",
+          "Mana barangnya Bre?! Minimal satu lah, mau foto apa video bebas!",
       });
     }
 
@@ -21,7 +21,7 @@ export const uploadGallery = async (req: Request, res: Response) => {
       // 🕵️ Validasi Size (Cuma buat jaga-jaga kalo FE lu jebol)
       if (item.type === "video" && item.size > 50 * 1024 * 1024) {
         throw new Error(
-          `Video ${item.name || "lu"} kegedean, Jembot! Maks 50MB!`,
+          `Video ${item.name || "lu"} kegedean, JeBre! Maks 50MB!`,
         );
       }
 
@@ -44,7 +44,7 @@ export const uploadGallery = async (req: Request, res: Response) => {
       data: newItems,
     });
   } catch (error: any) {
-    console.error("Gagal Upload Galeri, mbot!:", error.message);
+    console.error("Gagal Upload Galeri, Bre!:", error.message);
     res.status(500).json({
       success: false,
       message: error.message || "Server lu lagi puyeng, bgsyad!",

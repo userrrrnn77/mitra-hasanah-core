@@ -68,7 +68,7 @@ export const roleMiddleware = (allowedRoles: string[]) => {
     if (!req.user) {
       return res.status(401).json({
         success: false,
-        message: "Data user kaga ketemu, login dulu bgsd!",
+        message: "Data user kaga ketemu, login dulu",
       });
     }
 
@@ -78,7 +78,7 @@ export const roleMiddleware = (allowedRoles: string[]) => {
     if (!roles.includes(userRole)) {
       return res.status(403).json({
         success: false,
-        message: `Akses ditolak: Lu cuma "${req.user.role}", kaga level masuk sini mbot!`,
+        message: `Akses ditolak: Lu cuma "${req.user.role}", kaga level masuk sini!`,
       });
     }
 
@@ -92,7 +92,7 @@ export const loginLimiter = rateLimitFn({
   handler: (req: AuthRequest, res: Response) => {
     res.status(429).json({
       success: false,
-      message: "Lu login mulu kayak mau ngerampok, tunggu 15 menit lagi bgsd!",
+      message: "Lu login mulu kayak mau ngerampok, tunggu 15 menit lagi bre!",
     });
   },
   standardHeaders: true,

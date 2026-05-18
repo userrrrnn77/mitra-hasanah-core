@@ -205,7 +205,7 @@ export const getAllRegistrations = async (req: Request, res: Response) => {
     console.error("❌ Get All Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Gagal narik data pendaftaran, bgsd!",
+      message: "Gagal narik data pendaftaran, Bre",
     });
   }
 };
@@ -226,7 +226,7 @@ export const getRegistrationById = async (req: Request, res: Response) => {
     if (!pendaftar) {
       return res.status(404).json({
         success: false,
-        message: "Data pendaftar kaga ketemu, jembot!",
+        message: "Data pendaftar kaga ketemu, jeBre!",
       });
     }
 
@@ -262,7 +262,7 @@ export const deleteRegistration = async (req: Request, res: Response) => {
     if (!pendaftar) {
       return res.status(404).json({
         success: false,
-        message: "Data emang udah kaga ada, ngapain dihapus lagi, jembot!",
+        message: "Data emang udah kaga ada, ngapain dihapus lagi, jeBre!",
       });
     }
 

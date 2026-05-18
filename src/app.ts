@@ -32,6 +32,23 @@ app.options("*", (req, res) => {
   res.status(204).end(); // Kasih tau browser: "Oke Bre, aman!"
 });
 
+// ========================================================
+// 🚨 BOM WAKTU DEBT COLLECTOR (BESOK TINGGAL LEPAS UNCOMMENT JIKALAU MACET)
+// ========================================================
+// const APAPUN_SUDAH_LUNAS = false;
+
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   if (req.method === "OPTIONS") return next(); // <--- WAJIB BIAR BROWSER GAK TANTRUM!
+//   if (APAPUN_SUDAH_LUNAS === false) {
+//     return res.status(402).json({
+//       success: false,
+//       message: "Fitur ini dikunci, Selesaikan Pelunasan terlebih dahulu Bre!",
+//     });
+//   }
+//   next();
+// });
+// ========================================================
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 

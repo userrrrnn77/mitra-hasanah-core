@@ -20,7 +20,7 @@ export const createDetail = async (req: AuthRequest, res: Response) => {
     if (!catalogExists) {
       return res.status(404).json({
         success: false,
-        message: "Produk di katalog kaga ketemu! Bikin katalognya dulu, mbot!",
+        message: "Produk di katalog kaga ketemu! Bikin katalognya dulu, Bre!",
       });
     }
 
@@ -46,7 +46,7 @@ export const createDetail = async (req: AuthRequest, res: Response) => {
 
     res.status(201).json({
       success: true,
-      message: "Brosur detail berhasil dirakit, mewah bgsd!",
+      message: "Brosur detail berhasil dirakit, mewah Bre!",
       data: newDetail,
     });
   } catch (error: any) {
@@ -68,7 +68,7 @@ export const getDetailById = async (req: Request, res: Response) => {
     if (!detail) {
       return res.status(404).json({
         success: false,
-        message: "Detail kaga ketemu! Belom diisi kali, mbot!",
+        message: "Detail kaga ketemu! Belom diisi kali, Bre!",
       });
     }
 
@@ -127,7 +127,7 @@ export const deleteDetail = async (req: AuthRequest, res: Response) => {
     if (!deleted) {
       return res.status(404).json({
         success: false,
-        message: "Emang udah kaga ada datanya, bgsd!",
+        message: "Emang udah kaga ada datanya, Bre!",
       });
     }
 

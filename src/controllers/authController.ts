@@ -76,7 +76,7 @@ export const logout = async (_req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Logout sukses! Token lu udah expired secara moral, bgsd!",
+      message: "Logout sukses! Token lu udah expired secara moral",
     });
   } catch (error: any) {
     res.status(500).json({

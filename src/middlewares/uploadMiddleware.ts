@@ -47,7 +47,7 @@ const fileFilter = (
   if (file.mimetype.startsWith("image") || file.mimetype.startsWith("video")) {
     cb(null, true);
   } else {
-    cb(new Error("Format kaga didukung mbot! Harus Gambar atau Video!"));
+    cb(new Error("Format kaga didukung Bre! Harus Gambar atau Video!"));
   }
 };
 
@@ -98,7 +98,7 @@ export const deleteMultipleFromCloudinary = async (
       await cloudinary.api.delete_resources(publicIds, { resource_type: type });
     }
   } catch (error) {
-    console.error("Cloudinary Cleanup Failed, mbot!", error);
+    console.error("Cloudinary Cleanup Failed, Bre!", error);
   }
 };
 // ==========================================

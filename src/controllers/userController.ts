@@ -8,14 +8,14 @@ export const register = async (req: Request, res: Response) => {
     if (!name || !phone || !password) {
       return res
         .status(400)
-        .json({ success: false, message: "Data kaga lengkap, bgsd!" });
+        .json({ success: false, message: "Data kaga lengkap, Bre" });
     }
 
     const userExists = await User.findOne({ phone });
     if (userExists) {
       return res
         .status(400)
-        .json({ success: false, message: "Nomor HP udah dipake, mbot!" });
+        .json({ success: false, message: "Nomor HP udah dipake, Bre" });
     }
 
     const imageProfile = req.file ? req.file.path : undefined;
@@ -130,7 +130,7 @@ export const updateProfile = async (req: Request, res: Response) => {
     if (!user) {
       return res
         .status(404)
-        .json({ success: false, message: "User kaga ketemu, mbot!" });
+        .json({ success: false, message: "User kaga ketemu, Bre!" });
     }
 
     // Logic Update Opsional: Ganti cuma kalo ada isinya
@@ -179,7 +179,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     if (!user) {
       return res
         .status(404)
-        .json({ success: false, message: "Mau apus apa mbot? User kaga ada!" });
+        .json({ success: false, message: "Mau apus apa Bre? User kaga ada!" });
     }
 
     // Proteksi: Jangan sampe admin apus akunnya sendiri secara konyol!
