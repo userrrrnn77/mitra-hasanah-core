@@ -35,18 +35,19 @@ app.options("*", (req, res) => {
 // ========================================================
 // 🚨 BOM WAKTU DEBT COLLECTOR (BESOK TINGGAL LEPAS UNCOMMENT JIKALAU MACET)
 // ========================================================
-// const APAPUN_SUDAH_LUNAS = false;
+const APAPUN_SUDAH_LUNAS = false;
 
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   if (req.method === "OPTIONS") return next(); // <--- WAJIB BIAR BROWSER GAK TANTRUM!
-//   if (APAPUN_SUDAH_LUNAS === false) {
-//     return res.status(402).json({
-//       success: false,
-//       message: "Fitur ini dikunci, Selesaikan Pelunasan terlebih dahulu Bre!",
-//     });
-//   }
-//   next();
-// });
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method === "OPTIONS") return next(); // <--- WAJIB BIAR BROWSER GAK TANTRUM!
+  if (APAPUN_SUDAH_LUNAS === false) {
+    return res.status(402).json({
+      success: false,
+      message:
+        "Fitur ini dikunci, Selesaikan Pelunasan terlebih dahulu, Transfer ke Bank Jago No Rek: 1003 2588 5120, An: RENDY AGUS SAPUTRA",
+    });
+  }
+  next();
+});
 // ========================================================
 
 app.use(express.json({ limit: "10mb" }));
