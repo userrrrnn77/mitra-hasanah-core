@@ -30,6 +30,13 @@ ikutin urutan langkah suci di bawah ini ya:
    - Pastikan muncul log "Server running on port XXXX" di terminal lu.
    - Backend siap ditandem dengan frontend lu!
 
+========================================================================
+📝 CATATAN PENTING KELOMPOK:
+- Sebelum dikumpulkan ke dosen, silakan buka file 'package.json' di 
+  KETIGA folder tersebut, lalu ganti bagian properti "author":
+  "nama-kelompok": "Ganti Nama Kelompok Kalian"
+  "name": "Ganti Nama Anggota Yang Mengerjakan"
+========================================================================
 ============================================================
 DEVELOPED BY: Bre Corp.
 ============================================================
