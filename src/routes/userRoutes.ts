@@ -45,4 +45,6 @@ router.patch(
 // Musnahkan user dari DB
 router.delete("/:id", authMiddleware, roleMiddleware(["ADMIN"]), deleteUser);
 
+// nice mantap jiwa
+
 export default router;

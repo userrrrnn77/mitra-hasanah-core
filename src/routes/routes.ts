@@ -11,8 +11,6 @@ import carouselRoutes from "./carouselRoutes.js";
 
 const router = Router();
 
-console.log("AUTH ROUTES LOADED");
-
 // Semua yang diawali /registration bakal dilempar ke registrationRoutes
 router.use("/registration", registrationRoutes); // registrasi user
 router.use("/auth", authRoutes); // authentication
