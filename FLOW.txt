@@ -1,0 +1,35 @@
+FLOW.txt
+
+============================================================
+🚀 CARA MENJALANKAN BACKEND MITRA HASANAH CORE 🚀
+============================================================
+
+Halo Bre! Biar kodingan backend ini bisa jalan mulus di laptop lu, 
+ikutin urutan langkah suci di bawah ini ya:
+
+1. EKSTRAK FILE
+   - Ekstrak source code ini ke dalam folder laptop lu.
+   - Buka terminal / command prompt, lalu masuk ke folder 'backend'.
+
+2. INSTALL DEPENDENCIES
+   - Ketik perintah ini di terminal untuk menginstall semua library:
+     npm install
+
+3. JALANKAN PROGRAM (PILIH SALAH SATU JALUR):
+
+   A. JALUR NODE.JS (Standar Laptop Umum)
+      - Jika di laptop lu cuma ada Node.js biasa, langsung ketik:
+        npm run dev:node
+      - (Otomatis pake npx nodemon, kodingan bakal auto-refresh kalau diedit).
+
+   B. JALUR BUN RUNTIME (Rekomendasi - Kenceng Sempurna!)
+      - Jika lu udah install Bun di laptop lu, langsung ketik:
+        npm run dev:bun
+
+4. CEK STATUS
+   - Pastikan muncul log "Server running on port XXXX" di terminal lu.
+   - Backend siap ditandem dengan frontend lu!
+
+============================================================
+DEVELOPED BY: Bre Corp.
+============================================================
