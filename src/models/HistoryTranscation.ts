@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Document } from "mongoose";
 
 export interface IHistoryTransaction extends Document {
-  registrationId: mongoose.Types.ObjectId;
+  registrationId: string;
   buktiTransfer: string;
   buktiKTP: string;
 }
@@ -9,8 +9,7 @@ export interface IHistoryTransaction extends Document {
 const HistoryTransactionSchema = new Schema<IHistoryTransaction>(
   {
     registrationId: {
-      type: Schema.Types.ObjectId,
-      ref: "Registration",
+      type: String,
       required: true,
     },
     buktiTransfer: {

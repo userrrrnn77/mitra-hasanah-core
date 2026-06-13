@@ -1,14 +1,19 @@
 import { Request, Response } from "express";
 import HistoryTransaction from "../models/HistoryTranscation.js";
 import { AuthRequest } from "../middlewares/authMiddleware.js";
+import Registration from "../models/Registration.js";
 
 export const uploadTransaction = async (req: Request, res: Response) => {
   try {
     const { buktiTransfer, buktiKTP, registrationId } = req.body;
 
-    console.log(req.body);
+    const nasabah = await Registration.findOne({
+      ktpNumber: req.body.registrationId,
+    });
 
-    if (!registrationId) {
+    const nasabahId = nasabah?._id?.toString() || "";
+
+    if (!nasabahId) {
       return res
         .status(404)
         .json({ success: false, message: "Registrasi Id Tidak DItemukan" });
@@ -22,7 +27,7 @@ export const uploadTransaction = async (req: Request, res: Response) => {
     }
 
     const newHistoryTransaction = await HistoryTransaction.create({
-      registrationId,
+      registrationId: nasabahId,
       buktiKTP,
       buktiTransfer,
     });
