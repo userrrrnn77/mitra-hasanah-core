@@ -42,7 +42,7 @@ export type SavingProduct =
 export interface IRegistration extends Document {
   fullName: string;
   birthPlace: string;
-  birthDate: Date; // ini date ya mbot kagak string
+  birthDate: Date;
   gender: Gender;
   addressKTP: string;
   addressDomisili: string;
@@ -75,7 +75,7 @@ const RegistrationSchema = new Schema<RegistrationDocument>(
     addressKTP: { type: String, required: true },
     addressDomisili: { type: String, required: true },
     phoneNumber: { type: String, required: true },
-    ktpNumber: { type: String, required: true, unique: true }, // KTP kaga boleh double, taik!
+    ktpNumber: { type: String, required: true, unique: true },
     occupation: {
       type: String,
       enum: [
@@ -136,12 +136,12 @@ const RegistrationSchema = new Schema<RegistrationDocument>(
       required: true,
     },
     initialDeposit: { type: Number, required: true },
-    isVerified: { type: Boolean, default: false }, // kasih ini bre, kalo dia udah daftar tapi belum deposit jangan kasih akses, ya ga bre?
-    heirName: { type: String, trim: true }, // Opsional sesuai Interface lu
+    isVerified: { type: Boolean, default: false }, 
+    heirName: { type: String, trim: true }, 
     heirAddress: { type: String, trim: true },
   },
   {
-    timestamps: true, // Biar lu tau record createdAt & updatedAt-nya, Bre!
+    timestamps: true, 
   },
 );
 

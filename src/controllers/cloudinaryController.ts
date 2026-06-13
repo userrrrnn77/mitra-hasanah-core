@@ -6,9 +6,6 @@ export const getSignature = (req: Request, res: Response) => {
   const timestamp = Math.round(Date.now() / 1000);
   const folder = "baitul-maal";
 
-  console.log("SECRET:", process.env.CLOUDINARY_API_SECRET);
-
-  // 🔥 STRING HARUS SESUAI PARAM FE
   const stringToSign = `folder=${folder}&timestamp=${timestamp}`;
 
   const signature = crypto

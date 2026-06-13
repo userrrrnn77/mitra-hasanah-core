@@ -8,6 +8,8 @@ import productDetailRoutes from "./productDetailRoutes.js";
 import productRoutes from "./productRoutes.js";
 import userRoutes from "./userRoutes.js";
 import carouselRoutes from "./carouselRoutes.js";
+import historyTransaction from "./historyTransactionRoutes.js";
+import newsRoutes from "./newsRoutes.js"; 
 
 const router = Router();
 
@@ -20,5 +22,7 @@ router.use("/carousel", carouselRoutes); //  carousel routes
 router.use("/product-detail", productDetailRoutes); // detailProduct routes
 router.use("/product", productRoutes); // product card
 router.use("/user", userRoutes); // karyawan atau admin
+router.use("/transaction", historyTransaction); // route transaction
+router.use("/news", newsRoutes); // Semua rute berita resmi
 
 export default router;

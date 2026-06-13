@@ -1,13 +1,13 @@
 import mongoose, { Document } from "mongoose";
 
 export interface IProducts {
-  id: string; // Slug/ID Manual buat relasi
+  id: string; 
   title: string;
   fullTitle?: string;
   desc?: string;
   icon: string;
   image?: string;
-  publicId?: string; // <--- WAJIB TAMBAHIN INI, BRE!
+  publicId?: string; 
   category: "simpanan" | "pembiayaan";
   createdAt?: Date;
   updatedAt?: Date;
@@ -22,7 +22,7 @@ const ProductsSchema = new mongoose.Schema<IProductsDocument>(
       required: [true, "ID Produk (slug) wajib ada, mbot!"],
       unique: true,
       trim: true,
-      lowercase: true, // Biar konsisten simpanan-pokok vs Simpanan-Pokok
+      lowercase: true, 
       index: true,
     },
     title: { type: String, required: true, trim: true },
@@ -30,7 +30,7 @@ const ProductsSchema = new mongoose.Schema<IProductsDocument>(
     desc: { type: String, trim: true },
     icon: { type: String, default: "help-circle", trim: true },
     image: { type: String, trim: true },
-    publicId: { type: String, trim: true }, // Tempat nyimpen ID Cloudinary
+    publicId: { type: String, trim: true }, 
     category: {
       type: String,
       enum: ["simpanan", "pembiayaan"],
@@ -45,7 +45,7 @@ const ProductsSchema = new mongoose.Schema<IProductsDocument>(
     toJSON: {
       virtuals: true,
       transform: (_doc, ret) => {
-        delete (ret as any)._id; // Bersihkan sampah _id
+        delete (ret as any)._id;
         return ret;
       },
     },
@@ -54,7 +54,6 @@ const ProductsSchema = new mongoose.Schema<IProductsDocument>(
 
 ProductsSchema.index({ createdAt: -1 });
 
-// Statics buat nyari produk sat-set pake id manual
 ProductsSchema.statics.findByIdManual = function (id: string) {
   return this.findOne({ id: id.toLowerCase().trim() });
 };
